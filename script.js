@@ -36,6 +36,12 @@ const locations = [
     text: "You enter the store."
 
 },
+{
+    name: "cave",
+    "button text": ["Fight slime", "fight fanged beast", "Go to town square"],
+    "button functions": [fightSlime, fightBeast, goTown],
+    text: "You enter the cave. You see some monsters."
+},
 ]; 
 
 
@@ -51,13 +57,13 @@ button3.onclick = fightDragon;// when you click this button you fight dragon
 // innerHtml on the other hand returns all text, including html tags, that is contained by an element. 
 
 function update(location) {
-    button1.innerText = location["button text"][0];
+    button1.innerText = location["button text"][0]; // using bracket notation to get the button text property of location object passed into the function
     button2.innerText = location["button text"][1];
     button3.innerText = location["button text"][2];
 
-    button1.onClick = location["button functions"][0];
-    button2.onClick = location["button functions"][1];
-    button3.onClick = location["button functions"][2];
+    button1.onclick = location["button functions"][0];
+    button2.onclick = location["button functions"][1];
+    button3.onclick = location["button functions"][2];
 
     text.innerText = location.text;
 
@@ -76,7 +82,7 @@ function goStore() {
 }
 
 function goCave() {
-    console.log("Going to cave");
+    update(locations[2]);
 }
 
 function fightDragon() {
@@ -84,11 +90,20 @@ function fightDragon() {
 }
 
 function buyHealth() {
-
+    gold -= 10;
+    health += 10;
+    goldText.innerText = gold;
 }
 
 function buyWeapon() {
 
 }
 
+function fightSlime() {
+
+}
+
+function fightBeast() {
+
+}
 
