@@ -1,10 +1,13 @@
+/*Var is function-scoped, let and const are block scoped
+var has hoisting, let and const do not */
 let xp = 0;
 let health = 100;
 let gold = 50;
 let currentWeapon = 0;
 let fighting;
 let monsterHealth;
-let inventory = ["stick"];
+let inventory = ["stick"]; 
+
 
 /* The querySectlor() method returns the first child element that matches a specified
 CSS selector(s) of an element */
@@ -22,6 +25,25 @@ const monsterHealthText = document.querySelector("#monsterHealth");
 
 // object are indicated by curly braces {}
 //object properties are written as (name of the property) key: value (value that property holds) pairs
+const weapons = [
+    {
+    name: "stick",
+    power: 5
+},
+{
+    name: "dagger",
+    power: 30
+}, 
+{
+    name: "claw hammer",
+    power: 50
+}, 
+{
+    name: "sword",
+    power: 100
+},
+];
+
 const locations = [
     {
     name: "town square",
@@ -90,14 +112,40 @@ function fightDragon() {
 }
 
 function buyHealth() {
+    if (gold >= 10) {
     gold -= 10;
     health += 10;
     goldText.innerText = gold;
+    healthText.innerText = health;
+    } else {
+        text.innerText = "You do not have enough gold to buy health.";
+
+    }
 }
 
+
+/* array indexing starts at zero.The index of the last element in an array is
+one less than the length of the array  */
 function buyWeapon() {
+    if (currentWeapon < weapons.length -1){
+    if (gold >= 30) {
+        gold -=30;
+        currentWeapon ++;
+        goldText.innerText = gold;
+        let newWeapon = weapons[currentWeapon].name;
+        text.innerText = "You now have a" + newWeapon;
+        inventory.push(newWeapon)// The push() method adds new items to the end of an array.
+        text.innerText += "In your inventory you have: " + inventory;
+
+
+    }
+    else{
+        text.innerText = "You do not have enough gold to buy a weapon.";
+    }
+}
 
 }
+
 
 function fightSlime() {
 
