@@ -44,6 +44,24 @@ const weapons = [
 },
 ];
 
+const monsters = [
+    {
+    name: "slime",
+    level: 2,
+    health: 15
+},
+    {
+    name: "fanged beast",
+    level: 8,
+    health: 60
+},
+    {
+    name: "dragon",
+    level: 20,
+    health: 300
+}
+]
+
 const locations = [
     {
     name: "town square",
@@ -64,6 +82,12 @@ const locations = [
     "button functions": [fightSlime, fightBeast, goTown],
     text: "You enter the cave. You see some monsters."
 },
+{
+    name: "fight",
+    "button text": [Attack, Dodge, Run],
+    "button functions": [attack, dodge, goTown],
+    text: "You are fighting a monster"
+}
 ]; 
 
 
@@ -107,9 +131,6 @@ function goCave() {
     update(locations[2]);
 }
 
-function fightDragon() {
-    console.log("Fighting dragon.");
-}
 
 function buyHealth() {
     if (gold >= 10) {
@@ -125,7 +146,7 @@ function buyHealth() {
 
 
 /* array indexing starts at zero.The index of the last element in an array is
-one less than the length of the array  */
+one less than the length of the array that's why we use .length -1  */
 function buyWeapon() {
     if (currentWeapon < weapons.length -1){
     if (gold >= 30) {
@@ -133,9 +154,9 @@ function buyWeapon() {
         currentWeapon ++;
         goldText.innerText = gold;
         let newWeapon = weapons[currentWeapon].name;
-        text.innerText = "You now have a" + newWeapon;
+        text.innerText = "You now have a " + newWeapon;
         inventory.push(newWeapon)// The push() method adds new items to the end of an array.
-        text.innerText += "In your inventory you have: " + inventory;
+        text.innerText += "In your inventory. You have: " + inventory;
 
 
     }
@@ -143,15 +164,52 @@ function buyWeapon() {
         text.innerText = "You do not have enough gold to buy a weapon.";
     }
 }
+else {
+    text.innerText = "You already have the most powerful weapon!";
+    button2.innerText = "Sell weapon for 15 gold";
+    button2.onclick = sellWeapon;
+}
+
+}
+
+function sellWeapon() {
+    if ( inventory.length > 1) {
+        gold += 15;
+        goldText,innerText = gold;
+        let currentWeapon;
+
+    }
 
 }
 
 
 function fightSlime() {
+    fighting = 0;
+    goFight();
 
 }
 
 function fightBeast() {
+    fighting = 0;
+    goFight();
+
+}
+
+function fightDragon() {
+    fighting = 0;
+    goFight();
+   
+}
+
+function goFight() {
+
+}
+
+function attack() {
+
+}
+
+function dodge() {
 
 }
 
