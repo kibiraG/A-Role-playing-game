@@ -41,7 +41,7 @@ const weapons = [
 {
     name: "sword",
     power: 100
-},
+}
 ];
 
 const monsters = [
@@ -84,7 +84,7 @@ const locations = [
 },
 {
     name: "fight",
-    "button text": [Attack, Dodge, Run],
+    "button text": ["Attack", "Dodge", "Run"],
     "button functions": [attack, dodge, goTown],
     text: "You are fighting a monster"
 }
@@ -154,8 +154,8 @@ function buyWeapon() {
         currentWeapon ++;
         goldText.innerText = gold;
         let newWeapon = weapons[currentWeapon].name;
-        text.innerText = "You now have a " + newWeapon;
-        inventory.push(newWeapon)// The push() method adds new items to the end of an array.
+        text.innerText = "You now have a " + newWeapon + ".";
+        inventory.push(newWeapon);// The push() method adds new items to the end of an array.
         text.innerText += "In your inventory. You have: " + inventory;
 
 
@@ -172,13 +172,19 @@ else {
 
 }
 
+/* shift() removes the first element from an array and returns it, 
+while unshift() adds one or more elements to the beginning of an array and returns the new length. */
+/* The pop() method removes the last element from an array and returns the value to caller*/
 function sellWeapon() {
     if ( inventory.length > 1) {
         gold += 15;
-        goldText,innerText = gold;
-        let currentWeapon;
-
-    }
+        goldText.innerText = gold;
+        let currentWeapon = inventory.shift();
+        text.innerText = "You sold a " + currentWeapon + ".";
+        text.innerText += "In your inventory you have: " + inventory;
+     } else {
+        text.innerText = "Don't sell your only weapon!";
+     }
 
 }
 
@@ -201,7 +207,12 @@ function fightDragon() {
    
 }
 
+/* both dot notation(.) and square bracket notation ([]) are
+ used to access properties of methods and objects */
+
 function goFight() {
+    update(locations[3]);
+    monsterHealth = monsters[fighting].health;
 
 }
 
