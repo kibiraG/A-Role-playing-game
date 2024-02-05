@@ -196,27 +196,36 @@ function fightSlime() {
 }
 
 function fightBeast() {
-    fighting = 0;
+    fighting = 1;
     goFight();
 
 }
 
 function fightDragon() {
-    fighting = 0;
+    fighting = 2;
     goFight();
    
 }
 
 /* both dot notation(.) and square bracket notation ([]) are
  used to access properties of methods and objects */
+ /*The style property is used to access the inline style of an element
+ and the display property is used to set the visibility of an element */
 
 function goFight() {
     update(locations[3]);
     monsterHealth = monsters[fighting].health;
+    monsterStats.style.display = "block";
+    monsterName.innerText = monsters[fighting].name; /*sets the innerText property of monsterName to be
+     the name property of the current monster */
+
+    monsterHealthText.innerText = monsterHealth; //sets health of current monsters
 
 }
 
 function attack() {
+    text.innerText = "The " + monsters[fighting].name + "attacks.";
+    text.innerText = " You attack it with your " + weapons[currentWeapon].name;
 
 }
 
