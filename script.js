@@ -223,13 +223,37 @@ function goFight() {
 
 }
 
+//math.random(), generates a random number from 0(inclusive) to 1 (exclusive).
+//math.floor (),rounds a given number down to the nearest integer.
+//math.floor(math.random() * 10); returns a random integer from 0 to 9.
+// math.floor(math.random() * 100) + 1; returns a random integer from 1 to 100.
 function attack() {
     text.innerText = "The " + monsters[fighting].name + "attacks.";
-    text.innerText = " You attack it with your " + weapons[currentWeapon].name;
+    text.innerText = " You attack it with your " + weapons[currentWeapon].name + ".";
+    health -= monsters[fighting].level; // sets health to equal health minus the monster's level.
+    monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;
+    healthText.innerText = health;
+    monsterHealthText.innerText = monsterHealth;
+
+    if (health <= 0){
+        lose();
+     } else if (monsterHealth <= 0) {
+        defeatMonster();
+
+     }
 
 }
 
 function dodge() {
+    text.innerText = "You dodge the attack from the " + monsters[fighting].name;
+
+}
+
+function defeatMonster() {
+
+}
+
+function lose() {
 
 }
 
