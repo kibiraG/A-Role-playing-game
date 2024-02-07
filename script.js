@@ -87,6 +87,18 @@ const locations = [
     "button text": ["Attack", "Dodge", "Run"],
     "button functions": [attack, dodge, goTown],
     text: "You are fighting a monster"
+},
+{
+    name: "kill monster",
+    "button text": ["Go to town", "go to town", "go to town"],
+    "button functions": [goTown, goTown, goTown],
+    text: 'The monster screams "Arg!" as it dies. You gain experience and find gold.'
+},
+{
+    name: "lose",
+    "button text": ["REPLAY", "REPLAY", "REPLAY"],
+    "button functions": [restart, restart, restart],
+    text: "You die ☠️."
 }
 ]; 
 
@@ -102,7 +114,9 @@ button3.onclick = fightDragon;// when you click this button you fight dragon
 // It controls the text that appears in an HTML element.
 // innerHtml on the other hand returns all text, including html tags, that is contained by an element. 
 
+//The update function updates the buttons to point specific locations options
 function update(location) {
+    monsterStats.style.display = "none";
     button1.innerText = location["button text"][0]; // using bracket notation to get the button text property of location object passed into the function
     button2.innerText = location["button text"][1];
     button3.innerText = location["button text"][2];
@@ -240,6 +254,13 @@ function attack() {
      } else if (monsterHealth <= 0) {
         defeatMonster();
 
+        //The strict equality operator checks if values are equal and same data type
+        if(fighting === 2) {
+            winGame();
+        } else {
+            defeatMonster();
+        }
+
      }
 
 }
@@ -250,10 +271,31 @@ function dodge() {
 }
 
 function defeatMonster() {
+    gold += Math.floor (monsters[fighting].level * 6.7);
+    xp += monsters[fighting].level;
+    goldText.innerText = gold;
+    xpText.innerText = xp;
+    update(locations[4]);
 
 }
 
 function lose() {
+    update(locations[5]);
 
+}
+
+function restart() {
+    xp = 0;
+    health = 100;
+    gold = 50;
+    currentWeapon = 0;
+    inventory = ["stick"];
+
+    goldText.innerText = gold;
+    healthText.innerText = health;
+    xpText.innerText = xp;
+    
+    goTown();
+    
 }
 
