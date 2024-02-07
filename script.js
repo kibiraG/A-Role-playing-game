@@ -246,13 +246,28 @@ function goFight() {
 //math.floor (),rounds a given number down to the nearest integer.
 //math.floor(math.random() * 10); returns a random integer from 0 to 9.
 // math.floor(math.random() * 100) + 1; returns a random integer from 1 to 100.
+/*The parameters, in a function call, are the function's arguments.Javascript arguments
+are passed by value:The function only gets to know the values, not the argument's locations.
+If a function changes an argument's value , it does not change the parameter's original value.*/
 function attack() {
     text.innerText = "The " + monsters[fighting].name + "attacks.";
     text.innerText = " You attack it with your " + weapons[currentWeapon].name + ".";
-    health -= monsters[fighting].level; // sets health to equal health minus the monster's level.
+    /* health -= monsters[fighting].level; // -> sets health to equal health minus the monster's level. */
+    health -= getMonsterAttackValue(monsters[fighting].level); /* This sets health equal to health minus the 
+    return value of the getMonsterAttackValue function, and passes the level of the monster as an argument*/
     monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;
     healthText.innerText = health;
     monsterHealthText.innerText = monsterHealth;
+
+
+    //The attack of the monster will be based on the monster's level and the player's xp
+    function getMonsterAttackValue(level){
+        const hit = (level * 5) - (Math.floor(Math.random() * xp)); /*This will set the monster's attack to five times
+        their level minus a random number between 0 and the player's xp*/
+        console.log(hit);
+        return hit;
+
+    }
 
     if (health <= 0){
         lose();
