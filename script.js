@@ -255,7 +255,12 @@ function attack() {
     /* health -= monsters[fighting].level; // -> sets health to equal health minus the monster's level. */
     health -= getMonsterAttackValue(monsters[fighting].level); /* This sets health equal to health minus the 
     return value of the getMonsterAttackValue function, and passes the level of the monster as an argument*/
-    monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;
+    if (isMonsterHit()){
+        monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;
+    } else {
+        text.innerText += "You miss.";
+    }
+  
     healthText.innerText = health;
     monsterHealthText.innerText = monsterHealth;
 
@@ -265,9 +270,18 @@ function attack() {
         const hit = (level * 5) - (Math.floor(Math.random() * xp)); /*This will set the monster's attack to five times
         their level minus a random number between 0 and the player's xp*/
         console.log(hit);
-        return hit;
+        return hit > 0 ?  hit: 0; //returns hit if if hit is grater than 0, or returns 0 if its not
 
     }
+
+    /*The player should hit if either Math.random() > .2 
+or if the player's health is less than 20 */
+/*The logical OR operator will use the first value if it's truthy
+.otherwise it will use the second*/
+function isMonsterHit () {
+    return Math.random() > .2 || health < 20;
+}
+
 
     if (health <= 0){
         lose();
@@ -323,4 +337,6 @@ function restart() {
     goTown();
     
 }
+
+
 
