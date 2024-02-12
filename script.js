@@ -91,7 +91,7 @@ const locations = [
 {
     name: "kill monster",
     "button text": ["Go to town", "go to town", "go to town"],
-    "button functions": [goTown, goTown, goTown],
+    "button functions": [goTown, goTown, easterEgg],
     text: 'The monster screams "Arg!" as it dies. You gain experience and find gold.'
 },
 {
@@ -365,6 +365,7 @@ where a - the inialization expression
       b - the condition
       c - the final expression 
       */
+     /*The .includes() method determines if an array contains an element and will return either true or false. */
 function pick(guess) {
     const numbers = [];
     while (numbers.length < 10) {
@@ -372,8 +373,24 @@ function pick(guess) {
         text.innerText = "You picked \n" + guess + ". Here are the random numbers:";
 
         /*A for loop runs for a specific number of times*/
-        for (let x = 1; x < 5; x++) {
+        for (let i = 0; i < 10; i++) {
+            text.innerText += numbers[i] + "\n";
 
+        }
+
+        if (numbers.includes(guess)) {
+            "Right! You win 29 gold!";
+            gold += 20;
+            goldText.innerText = gold;
+
+        } else {
+            "Wrong! You lose 10 health!";
+            health += 10;
+            healthText.innerText = health;
+
+            if (health <= 0) {
+                lose();
+            }
         }
 
     }
