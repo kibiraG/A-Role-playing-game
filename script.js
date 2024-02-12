@@ -99,11 +99,19 @@ const locations = [
     "button text": ["REPLAY", "REPLAY", "REPLAY"],
     "button functions": [restart, restart, restart],
     text: "You die ☠️."
-}, {
+}, 
+{
     name: "win",
     "button text": ["REPLAY", "REPLAY", "REPLAY"],
     "button functions": [restart, restart, restart],
     text: "You defeat the dragon! YOU WIN THE GAME! 🎉."
+}, 
+{
+    name: "easter egg",
+    "button text": ["2", "8", "Go to town square?"],
+    "button functions": [pickTwo, pickEight, goTown],
+    "text": "You find a secret game. Pick a number above. Ten numbers will be randomly chosen between 0 and 10. If the number you choose matches one of the random numbers, you win!"
+
 }
 ]; 
 
@@ -297,6 +305,13 @@ function isMonsterHit () {
 
      }
 
+     // invontory.pop() Removes the last item in an array AND return it so it appears in your string
+     if (Math.random() <= .1 && inventory.length !== 1) {
+        text.innerText += " Your " + inventory.pop() + "breaks.";
+        currentWeapon --;
+         
+     }
+
 }
 
 function dodge() {
@@ -336,6 +351,43 @@ function restart() {
     
     goTown();
     
+}
+
+// A hidden feature
+function easterEgg() {
+    update(locations[7]);
+}
+
+/*A while loop accepts a condition, and will run the code in the block 
+until the condition is no longer true */
+/*for loops are declared with three expressions separated by semicolons. for (a; b; c) 
+where a - the inialization expression 
+      b - the condition
+      c - the final expression 
+      */
+function pick(guess) {
+    const numbers = [];
+    while (numbers.length < 10) {
+        numbers.push(Math.floor(Math.random() * 11));
+        text.innerText = "You picked \n" + guess + ". Here are the random numbers:";
+
+        /*A for loop runs for a specific number of times*/
+        for (let x = 1; x < 5; x++) {
+
+        }
+
+    }
+    
+}
+
+function pickTwo() {
+    pick(2);
+
+}
+
+function pickEight() {
+    pick(8);
+
 }
 
 
